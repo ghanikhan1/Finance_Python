@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+    <main class="container p-5">
+        <table class= "table table-striped">
+            <thead>
+                <tr>
+                    <th><strong>Bought/Sell</strong></th>
+                    <th><strong>Symbol</strong></th>
+                    <th><strong>Shares</strong></th>
+                    <th><strong>Price</strong></th>
+                    <th><strong>Transacted</strong></th>
+
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for transaction in transactions %}
+                {% set w = transaction["shares"] | int %}
+                {% if w > 0 %}
+                <tr>
+                    <td><p>Bought</p></td>
+                    <td>{{transaction["symbol"]}}</td>
+                    <td>{{transaction["shares"]}}</td>
+                    <td>{{transaction["price"]}}</td>
+                    <td>{{transaction["transacted"]}}</td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td><p>Sell</p></td>
+                    <td>{{transaction["symbol"]}}</td>
+                    <td>{{transaction["shares"]}}</td>
+                    <td>{{transaction["price"]}}</td>
+                    <td>{{transaction["transacted"]}}</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+
+
+{% endblock %}
